@@ -417,7 +417,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ---------------- KARTU TOTAL KESELURUHAN UPAH ----------------
   Widget _buildSummaryBanner() {
     return Container(
       color: Theme.of(context).brightness == Brightness.light
@@ -502,7 +501,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ---------------- BILAH FILTER & PENCARIAN ----------------
   Widget _buildFilterRow() {
     return Padding(
       padding: const EdgeInsets.fromLTRB(16, 12, 16, 6),
@@ -575,7 +573,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // ---------------- DAFTAR CATATAN BARANG MASUK ----------------
   Widget _buildEntriesList() {
     final list = _filteredEntries;
 
@@ -822,7 +819,6 @@ class _AddEntrySheetState extends State<AddEntrySheet> {
             ),
             const SizedBox(height: 16),
 
-            // 1. Siapa yang memberi barang (Pekerja)
             TextField(
               controller: _workerCtrl,
               decoration: const InputDecoration(
@@ -851,7 +847,6 @@ class _AddEntrySheetState extends State<AddEntrySheet> {
             ],
             const SizedBox(height: 12),
 
-            // 2. Apa jenis barangnya
             TextField(
               controller: _itemCtrl,
               decoration: const InputDecoration(
@@ -863,7 +858,6 @@ class _AddEntrySheetState extends State<AddEntrySheet> {
             ),
             const SizedBox(height: 12),
 
-            // 3. Berapa jumlahnya & Satuan
             Row(
               children: [
                 Expanded(
@@ -895,7 +889,6 @@ class _AddEntrySheetState extends State<AddEntrySheet> {
             ),
             const SizedBox(height: 12),
 
-            // 4. Berapa upahnya (Tarif & Total Upah)
             Row(
               children: [
                 Expanded(
@@ -928,7 +921,6 @@ class _AddEntrySheetState extends State<AddEntrySheet> {
             ),
             const SizedBox(height: 12),
 
-            // 5. Kapan diberikan (Tanggal & Waktu)
             InkWell(
               onTap: () async {
                 final d = await showDatePicker(
@@ -1203,11 +1195,3 @@ class ExportScreen extends StatelessWidget {
     );
   }
 }
-'''
-
-print("Writing bb_main.dart validation check...")
-assert "TextPainter" not in app_code
-assert "TextDirection" not in app_code
-print("All assertions passed!")
-EOF
-python3 test_bb_app.py}
