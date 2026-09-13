@@ -54,27 +54,18 @@ jobs:
           except Exception:
               font = ImageFont.load_default()
 
-          bbox = draw.textbbox((0, 0), 'BB', font=font)
-          tw = bbox - bbox[0]
-          th = bbox - bbox
-          x = (size - tw) / 2 - bbox[0]
-          y = (size - th) / 2 - bbox
+          left, top, right, bottom = draw.textbbox((0, 0), 'BB', font=font)
+          tw = right - left
+          th = bottom - top
+          x = (size - tw) / 2 - left
+          y = (size - th) / 2 - top
           draw.text((x, y), 'BB', font=font, fill=(255, 255, 255, 255))
 
-          sizes = {
-              'mipmap-mdpi': 48,
-              'mipmap-hdpi': 72,
-              'mipmap-xhdpi': 96,
-              'mipmap-xxhdpi': 144,
-              'mipmap-xxxhdpi': 192,
-          }
-
-          res_dir = 'android/app/src/main/res'
+          sizes = {'mipmap-mdpi': 48, 'mipmap-hdpi': 72, 'mipmap-xhdpi': 96, 'mipmap-xxhdpi': 144, 'mipmap-xxxhdpi': 192}
           for folder, s in sizes.items():
-              p = os.path.join(res_dir, folder)
+              p = os.path.join('android/app/src/main/res', folder)
               os.makedirs(p, exist_ok=True)
-              resized = img.resize((s, s), Image.Resampling.LANCZOS)
-              resized.save(os.path.join(p, 'ic_launcher.png'))
+              img.resize((s, s)).save(os.path.join(p, 'ic_launcher.png'))
           print('Custom BB Launcher Icons generated successfully!')
           "
           flutter pub get
