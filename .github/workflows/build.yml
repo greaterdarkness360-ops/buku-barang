@@ -35,16 +35,15 @@ jobs:
           mv pubspec.yaml.bak pubspec.yaml
           mv lib/main.dart.bak lib/main.dart
           
-          # Install Pillow & buat ikon BB resolusi tinggi otomatis
-          python3 -m pip install --upgrade pillow
+          pip install pillow
           python3 -c "
           import os
           from PIL import Image, ImageDraw, ImageFont
-          
+
           size = 512
           img = Image.new('RGBA', (size, size), (0, 0, 0, 0))
           draw = ImageDraw.Draw(img)
-          
+
           bg_color = (56, 189, 248, 255) # Biru Muda (#38BDF8)
           radius = int(size * 0.22)
           draw.rounded_rectangle([(0, 0), (size, size)], radius=radius, fill=bg_color)
@@ -52,7 +51,7 @@ jobs:
 
           try:
               font = ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf', int(size * 0.46))
-          except:
+          except Exception:
               font = ImageFont.load_default()
 
           bbox = draw.textbbox((0, 0), 'BB', font=font)
@@ -78,7 +77,6 @@ jobs:
               resized.save(os.path.join(p, 'ic_launcher.png'))
           print('Custom BB Launcher Icons generated successfully!')
           "
-          
           flutter pub get
 
       - name: Build APK Release
