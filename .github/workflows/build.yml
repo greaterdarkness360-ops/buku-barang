@@ -35,7 +35,8 @@ jobs:
           mv pubspec.yaml.bak pubspec.yaml
           mv lib/main.dart.bak lib/main.dart
           
-          # Membuat App Icon "BB" Biru Muda Resolusi Tinggi
+          # Install Pillow & buat ikon BB resolusi tinggi otomatis
+          python3 -m pip install --upgrade pillow
           python3 -c "
           import os
           from PIL import Image, ImageDraw, ImageFont
@@ -75,7 +76,7 @@ jobs:
               os.makedirs(p, exist_ok=True)
               resized = img.resize((s, s), Image.Resampling.LANCZOS)
               resized.save(os.path.join(p, 'ic_launcher.png'))
-          print('Custom BB Launcher Icons generated!')
+          print('Custom BB Launcher Icons generated successfully!')
           "
           
           flutter pub get
